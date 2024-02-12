@@ -3,7 +3,7 @@
 ## Booyer-Moore Merge Voting Algorithm
 
 - finds out the element which occurs n/2 times in an array.
-- operates on the fact that majority element will be always more than one than other elements in an array.
+- operates on the fact that (freq(majority element) - freq(other elements)) >=1.
 
 ```cpp
 int majorityElement(vector<int>& nums) {
