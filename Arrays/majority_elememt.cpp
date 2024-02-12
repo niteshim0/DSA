@@ -1,4 +1,6 @@
 //Soution1 )) Hashing
+#include <bits/stdc++.h>
+using namespace std;
 int majorityElement(vector<int>& nums) {
        unordered_map<int,int> freq;
        int n = nums.size();
