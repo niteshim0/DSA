@@ -1,60 +1,51 @@
-#include<bits/stdc++.h>
-using namespace std;
-vector<int> prefixTable(const string& pattern){
-  int m   = pattern.size();
-  vector<int> LPS(m,0);
-  int i = 1,j = 0;
-  while(i<m){
-    if(pattern[i] == pattern[j]){
-        LPS[i] = j + 1;
-        i++;
-        j++;
-    }else if(j>0){
-      j = LPS[j-1];
-    }else{
-      LPS[i] = 0;
-      i++;
-    }
-  }
-  return LPS;
-}
-vector<int> KMPAlgo(const string& text,const string& pattern){
-  vector<int> LPS = prefixTable(pattern);
-  vector<int> ans;
-  int i = 0;
-  int j = 0;
-  int n = text.size();
-  int m = pattern.size();
-  while(i<n){
-    if(text[i] == pattern[j]){
-      if(j == m-1){
-        ans.push_back(i-j);
-        j = 0;
-      }else{
-        i++;
-        j++;
-      }
-    }else if(j>0){
-      j  = LPS[j-1];
-    }else{
-      i++;
-    }
-  }
-  return ans;
-}
-int main(){
-   string text = "isawsquirrelnearmysquirrelhouseohmy";
-   string a = "my";
-   string b = "squirrel";
-   vector<int> va = KMPAlgo(text,a);
-   cout<<va.size()<<endl;
-   vector<int> vb = KMPAlgo(text,b);
-   for(auto & x : va){
-    cout<<x<<" ";
-   }
-   cout<<endl;
-   for(auto & x : vb){
-    cout<<x<<" ";
-   }
-   cout<<endl;
-}
+//https://www.geeksforgeeks.org/problems/search-pattern0205/1
+class Solution
+{
+    public:
+        vector <int> KMPSearch(string pattern, string text)
+        {
+            
+            int n = text.size();
+            int m = pattern.size();
+            vector<int> lps(m);
+            int i = 1 , j = 0;
+            lps[0] = 0;
+            while(i<m){
+                if(pattern[i] == pattern[j]){
+                    lps[i] = j+1;
+                    i++;
+                    j++;
+                }else{
+                    if(j>0){
+                        j = lps[j-1];
+                    }else{
+                        lps[i] = 0;
+                        i++;
+                    }
+                }
+            }
+            
+            vector<int> ans;
+            i = 0;
+            j = 0;
+            while(i<n){
+                if(text[i] == pattern[j]){
+                    i++;
+                    j++;
+                    if(j == m){
+                        ans.push_back(i-m+1); 
+                        j = lps[j-1];
+                    }
+                }else{
+                    if(j>0){
+                        j = lps[j-1];
+                    }else{
+                        i++;
+                    }
+                }
+            }
+            
+            return ans;
+        }
+     
+};
