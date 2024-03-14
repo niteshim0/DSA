@@ -9,3 +9,8 @@
 4. **[Distinct Subsequences](https://www.geeksforgeeks.org/problems/distinct-occurrences/1)**
 
 5. **[Buy and Sell a Share at most twice](https://www.geeksforgeeks.org/problems/buy-and-sell-a-share-at-most-twice/1)**
+
+6. **[Largest subsquare surrounded by X](https://www.geeksforgeeks.org/problems/largest-subsquare-surrounded-by-x0558/1)**
+
+
+
