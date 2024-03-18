@@ -84,7 +84,7 @@ static void bubble(int[] arr){
 - Average Case : O(N^2)
 
 **Space Complexity**
- O(1)
+ - O(1)
 
 **Problem Link**
 - [Bubble Sort](https://www.codingninjas.com/studio/problems/bubble-sort_624380)
@@ -127,7 +127,7 @@ static void swap(int[] arr,int first,int second){
 - Average Case : O(N^2)
 
 **Space Complexity**
- O(1)
+- O(1)
 
 **Problem Link**
 - [Insertion Sort](https://www.codingninjas.com/studio/problems/insertion-sort_624381)
