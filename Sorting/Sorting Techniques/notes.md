@@ -132,6 +132,60 @@ static void swap(int[] arr,int first,int second){
 **Problem Link**
 - [Insertion Sort](https://www.codingninjas.com/studio/problems/insertion-sort_624381)
 
+## Cyclic Sort
+
+- Cyclic sort is an efficient in-place sorting algorithm primarily used when dealing with arrays containing a distinct range of integers.
+
+- Cyclic sort is` not a stable` sorting algorithm, meaning it does not necessarily preserve the order of equal elements.
+
+- `In-place Sorting`: The sorting is performed within the given array without requiring additional memory allocation proportional to the size of the input.
+
+- `Comparison-free`: Unlike comparison-based sorting algorithms like Quicksort or Merge sort, Cyclic sort does not directly compare elements to each other during the sorting process. Instead, it relies on the cyclic nature of the permutation.
+
+- `Suitable for Restricted Range`: Cyclic sort is most efficient when dealing with arrays where the elements are integers within a specific range, typically from 1 to n, where n is the size of the array.The most important property of it , for only this reason it gets heavily asked intervies.
+
+- `Adaptability`: Cyclic sort is particularly useful when memory is a concern or when the range of values in the array is known and small.
+
+- `Deterministic`: The behavior of cyclic sort is deterministic, meaning that given the same input, it will always produce the same output.
+
+**Code**
+```c++
+   void swap(vector<int>&arr,int first,int second){
+        int temp = arr[first];
+        arr[first] = arr[second];
+        arr[second] = temp;
+    }
+    void cyclicSort(vector<int>&arr){
+        int i = 0;
+        int n = arr.size();
+        while(i<n){
+            int correctIdx = arr[i];
+            if(correctIdx == n){
+                i++;
+            }else if(arr[i]!=arr[correctIdx] && correctIdx!=n){
+                swap(arr,i,correctIdx);
+            }else{
+                i++;
+            }
+        }
+    }
+```
+
+**Time Complexity**
+- O(1)
+
+**Space Complexity**
+- O(1)
+
+**Problem Link**
+- [Missing Number](https://leetcode.com/problems/missing-number/)
+
+
+
+
+
+
+
 
 
 
