@@ -65,7 +65,7 @@ The time complexity of binary search is O(log n) and the space complexity is O(1
 - `Static Data`: The data should not change frequently. If the data is dynamic and changes often, the overhead of maintaining the sorted order may outweigh the benefits of using binary search.
 - `Random Access`: The data structure should support random access (like arrays). Binary search is inefficient for linked lists and other structures that don't allow direct access to the middle element.
 
-## Pattern I :: Implemntaion of lower_bound and upper_bound
+## Pattern I :: lower_bound and upper_bound
 
 **lower_bound**: In a sorted sequence of elements, the lower_bound function returns an iterator pointing to the first element that is not less than a specified value. If there are multiple elements with the same value as the specified one, lower_bound points to the first occurrence of such value.
 
