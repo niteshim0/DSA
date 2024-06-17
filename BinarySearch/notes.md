@@ -172,6 +172,193 @@ The time complexity of lower_bound and upper_bound is O(log n) where n is the nu
 
 **Questions:-**
 - [LeetCode 35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+- [LeetCode 34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+```cpp
+class Solution {
+public:
+    int binarySearch(vector<int>&nums,int target,bool isFirstIdx){
+        int n = nums.size();
+        int potentialAns = -1;
+        int start = 0,end=n-1;
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(nums[mid]>target){
+                end = mid - 1;
+            }else if(nums[mid]<target){
+                start = mid + 1;
+            }else{
+                potentialAns = mid;
+                if(isFirstIdx){
+                    end = mid - 1;
+                }else{
+                    start = mid + 1;
+                }
+            }
+        }
+        return potentialAns;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans = {-1,-1};
+        ans[0] = binarySearch(nums,target,true);
+        if(ans[0]!=-1) ans[1] = binarySearch(nums,target,false);
+        return ans;
+
+    }
+};
+```
+- [Floor and Ceil in a Sorted Array](https://www.geeksforgeeks.org/problems/ceil-the-floor2802/1)
+- [Number of Occurences](https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1)
+
+
+## Pattern II :: Binary Search in Rotated Sorted Arrays
+
+- [LeetCode 33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        // on half will always be sorted be it left or right
+        // one other way to find pivot using binarySearch which divides two half
+        // and on parted sorted array apply binarySearch
+        int n = nums.size();
+        int start = 0,end=n-1;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+
+            if(nums[mid] == target) return mid;
+
+            // left part sorted
+            if(nums[start]<=nums[mid]){
+                if(nums[start]<=target && target<=nums[mid]){
+                    end = mid-1;
+                }else{
+                    start = mid + 1;
+                }
+            }else{ // right part sorted
+                if(nums[end]>=target && target>=nums[mid]){
+                    start = mid + 1;
+                }else{
+                    end = mid - 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+ };
+```
+This is not going to work if there are duplicates in the array. For that we need to modify the code a bit.Why it doesn't work with duplicates? Because if there are duplicates, we can't decide which part is sorted.Take a case where arr[start] == arr[mid] == arr[end].In this case,it is impossible to decide which part is sorted with our previous approach so we simply eliminate start and end from our search space.In that case, we can just increment the start pointer and decrement the end pointer.
+
+Dry run on this array you will get your answer.
+```cpp
+[3,1,2,3,3,3,3]
+```
+
+- [LeetCode 81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
+
+```cpp
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int start = 0,end=n-1;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+
+            if(nums[mid] == target) return true;
+
+            // elimating the start pointer and end pointer if its can't let us decide which
+            // part is sorted
+            if((nums[start] == nums[mid]) && (nums[end] == nums[mid]))
+            {
+                start++;
+                end--;
+            }  // left part sorted
+            else if(nums[start]<=nums[mid]){
+                if(nums[start]<=target && target<nums[mid]){
+                    end = mid-1;
+                }else{
+                    start = mid + 1;
+                }
+            }else{ // right part sorted
+                if(nums[end]>=target && target>nums[mid]){
+                    start = mid + 1;
+                }else{
+                    end = mid - 1;
+                }
+            }
+        }
+
+        return false;
+    }
+};
+```
+
+**Complexity Analysis:-** The time complexity of the above approach is O(log n) on average but if there are plenty of duplicated it can go high as close to O(n/2) where n is the number of elements in the array. The space complexity is O(1) as we are using constant space.
+
+- [LeetCode 153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+**Approach 1:-**
+```cpp 
+ // I will introduce a new concept here of Pivot Finder which is used to find the pivot in the rotated sorted array . It can be also done by the previous approach but this is more clean and easy to understand(according to me) which also solves all the previous problems as well as the peak type problems.
+class Solution {
+public:
+    int pivotFinder(vector<int>& nums){
+        int n = nums.size();
+        int start = 0,end=n-1;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            
+            if(mid<end && nums[mid]>nums[mid+1]){
+                return mid;
+            }else if(mid>start && nums[mid-1]>nums[mid]){
+                return mid-1;
+            }else if(nums[start]>=nums[mid]){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return -1;
+    }
+    int findMin(vector<int>& nums) {
+        int pivot = pivotFinder(nums);
+        return nums[pivot+1];
+    }
+};
+```cpp
+**Approach 2:-**
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int start = 0,end = n-1;
+        int ans = INT_MAX;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+
+            if(nums[start]<=nums[end]){ // whole portion is sorted
+               ans = min(ans,nums[start]);
+               break;
+            }
+            if(nums[start]<=nums[mid]){
+               ans = min(ans,nums[start]);
+               start = mid + 1;
+            }else{
+               ans = min(ans,nums[mid]);
+               end = mid-1;
+            }
+        }
+        return ans;
+    }
+};
+```
+
+- [LeetCode 154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+- [LeetCode 162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+- [LeetCode 852. Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/)
+
 
 
 
