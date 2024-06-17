@@ -298,7 +298,8 @@ public:
 **Complexity Analysis:-** The time complexity of the above approach is O(log n) on average but if there are plenty of duplicated it can go high as close to O(n/2) where n is the number of elements in the array. The space complexity is O(1) as we are using constant space.
 
 - [LeetCode 153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-**Approach 1:-**
+  
+- **Approach 1:*
 ```cpp 
  // I will introduce a new concept here of Pivot Finder which is used to find the pivot in the rotated sorted array . It can be also done by the previous approach but this is more clean and easy to understand(according to me) which also solves all the previous problems as well as the peak type problems.
 class Solution {
