@@ -65,6 +65,8 @@ The time complexity of binary search is O(log n) and the space complexity is O(1
 - `Static Data`: The data should not change frequently. If the data is dynamic and changes often, the overhead of maintaining the sorted order may outweigh the benefits of using binary search.
 - `Random Access`: The data structure should support random access (like arrays). Binary search is inefficient for linked lists and other structures that don't allow direct access to the middle element.
 
+# Binary Search on 1 D Arrays
+
 ## Pattern I :: lower_bound and upper_bound
 
 **lower_bound**: In a sorted sequence of elements, the lower_bound function returns an iterator pointing to the first element that is not less than a specified value. If there are multiple elements with the same value as the specified one, lower_bound points to the first occurrence of such value.
@@ -357,8 +359,105 @@ public:
 ```
 
 - [LeetCode 154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+
+
+```java
+//Intuition : Since here number can be duplicated , so we can't decide which part is sorted , we will compare only end and mid and if mid is greater that simply means we can eliminate the left part and if mid is less than end that means we can eliminate the right part(without excluding mid).Try to make a graph and see different cases. // if mid == end we can simply decrement the end pointer.
+
+class Solution {
+    public int findMin(int[] nums) {
+        int n = nums.length;
+        int start = 0;
+        int end = n - 1;
+        while(start<end){
+            int mid = start + (end-start)/2;
+            System.out.println(mid);
+            if(nums[mid] > nums[end]){
+                start = mid + 1;
+            }else if(nums[mid]<nums[end]){
+                end = mid;
+            }else{
+                end--;
+            }
+        }
+
+        return nums[start];
+    }
+}
+```
+
+## Pattern III :: Peak Element Problems
+
+Learn only one question it almost solves all the peak element problems.In these peak and duplicate type problems always try to draw a graph and see the different cases(almost every case will be visible).
 - [LeetCode 162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+```java
+//Intuition : we will check whether our mid is in downward slope or upward slope and if it is in downward slope then we will move to the left side(since peak chances are there) and if it is in upward slope then we will move to the right side(peak chances are there).these are the cases in almost every peak problem.
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int n = nums.length;
+        int start = 1;
+        int end = n-2;
+
+        if(n == 1) return 0;
+        if(nums[0]>nums[1]) return 0;
+        if(nums[n-1]>nums[n-2]) return n-1; // elimate the corner cases or out of bound error cases
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+
+            if(nums[mid]>nums[mid+1] && nums[mid]>nums[mid-1]){
+                return mid;
+            }else if(nums[mid]>nums[mid+1]){
+                end = mid-1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return -1;
+    }
+}
+```
 - [LeetCode 852. Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/)
+
+## Patter IV : Intuition Based Problems
+
+- [LeetCode 374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
+- [LeetCode 278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+- [LeetCode 540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
+
+```java
+
+// Intuition : Array is sorted only one elment is not repeated , otherwise all element occurs in pairs.
+// It gives us a idea to reduce the search space it means the non repeated element makes the count of no odd.
+// It also means that all the element occurs on the left side of the non repeated element will have their indices in fashion (even,odd) and all the element occurs on the right side of the non repeated element will have their indices in fashion (odd,even). // this exactly we will use to reduce the search space.
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int n = nums.length;
+        if(n == 1) return nums[0];
+        if(nums[0]!=nums[1]){
+            return nums[0];
+        }
+        if(nums[n-1]!=nums[n-2]) return nums[n-1];
+
+        int start = 1;
+        int end = n-2;
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(nums[mid]!=nums[mid+1] && nums[mid]!=nums[mid-1]){
+                return nums[mid];
+            }else if (((nums[mid] == nums[mid-1]) && (mid % 2 == 1)) || ((nums[mid] == nums[mid+1]) && (mid % 2 == 0))){
+                start = mid + 1;
+            }else{
+                end = mid-1;
+            }
+        }
+        return -1;
+    }
+}
+```
+
+
 
 
 
