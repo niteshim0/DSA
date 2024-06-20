@@ -457,6 +457,271 @@ class Solution {
 }
 ```
 
+# Binary Search on Answers(Predicate Binary Search)
+
+- these questions follow the pattern like (TTTTTFFFFF) or (FFFFTTTT) , at certain point the answer will change from true to false or false to true.i.e at certain limit its potential answer will exist after that it will not exist.
+
+- in such question , we always know what is the range of the answer(we alredy know potential start and end) and we have to find the exact answer in that range(by reducing the search space using binarySearch).(it is one of the most important pattern in binary search).
+
+- we have to only judge starting and ending point of the search space and we have to find the exact answer in that range.
+
+- in such question their is terms like minimum , maximum or their is given some answer range.
+
+-[Square Root of a Number](https://www.geeksforgeeks.org/problems/square-root/0)
+
+```java
+//Intuition : we know that square root of a number lies between 1 to n/2(smaller than this also),if we have to do linear search we iterate from 1 to n/2 and check if it is the square root or not. Why can't we do the same using binarySearch(since we alredy know the range of the answer).
+// So we will apply binarySearch for every mid value we will check is it the possible square root, if its not is it leads to some smaller value(increase the starting range) or leads to greater than the square root(reduce the end value) and we will reduce the search space accordingly.
+class Solution {
+    public int mySqrt(int x) {
+        int  start = 1 ;
+		int end = x;
+		
+		while(start<=end){
+		    int mid = start +(end-start)/2;
+		    
+		    if(mid == x/mid){
+		        return mid;
+		    }else if(mid>(x/mid)){
+		        end = mid-1;
+		    }else{
+		        start = mid + 1;
+		    }
+		}
+		return end;
+    }
+}
+```
+
+- [Find Nth root of a number](https://www.geeksforgeeks.org/problems/find-nth-root-of-m5843/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article)
+// Same as the previous one , here insted of two times multiplication we will do n times multiplication.
+
+- [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
+// Approach : we will apply binarySearch on the number of hours , for every mid value we will check is it possible to eat all the bananas in that time(mid value) or not , if it is possible then we will reduce the search space to left side(and store the potential answer)(reduce the end) otherwise to the right side(increase the start).
+    
+```java
+class Solution {
+    public long feasibleSpeed(long mid,int[] piles){
+        long hoursSpent = 0;
+        for(int pile  : piles){
+            if(pile<=mid){
+                hoursSpent++;
+            }else{
+                long req = pile/mid;
+                if(pile%mid!=0){
+                    req+=1;
+                }
+                hoursSpent+=req;
+            }
+        }
+        return hoursSpent;
+    }
+    public int minEatingSpeed(int[] piles, int h) {
+        long start = 1; // the minimum banana he can eat in one hour.
+        long end = Arrays.stream(piles).max().getAsInt(); // this is the maximum speed he can eat the bananas even if he eats faster than this answer will not change(since we are taking the ceil value of the division of the pile and mid value).
+
+        long potentialAns = -1;
+
+        while(start<=end){
+            long mid = start + (end-start)/2;
+            if(feasibleSpeed(mid,piles) <= h){
+                potentialAns = mid;
+                end = mid-1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return (int)potentialAns;
+    }
+}
+
+```
+
+- [Minimum Number of Days to Make m Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/)
+
+```java
+// Intuition : we will apply binarySearch on the number of days , for every mid value we will check is it possible to make m bouquets in that time(mid value) or not , if it is possible then we will reduce the search space to left side(and store the potential answer)(reduce the end) otherwise to the right side(increase the start).
+// Here the main thing to focus on is we need adjacent flowers to make a bouquet.That thing we need to keep in mind while generating the predicate function.
+
+class Solution {
+    public int feasibleFlowers(int mid,int k,int[] bloomDay){
+        int cnt = 0;
+        int bouquetsPossible = 0;
+        for(int bloom : bloomDay){
+            if(bloom<=mid){
+                cnt++;
+                if(cnt==k){
+                    bouquetsPossible+=1;
+                    cnt = 0;
+                }
+            }else{
+                cnt = 0;
+            }
+        }
+        return bouquetsPossible;
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        int start = Arrays.stream(bloomDay).min().getAsInt(); // even for 1 bouqet we need at least one flower to bloom.
+        int end = Arrays.stream(bloomDay).max().getAsInt(); // the max days after which every flower has bloomed.
+        
+        int n = bloomDay.length;
+        if(m*k>n) return -1; // even after blooming all the flowers they are not so strong in number so that we can make m bouquets.
+        int potentialAns = -1;
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(feasibleFlowers(mid,k,bloomDay)>=m){
+                potentialAns = mid;
+                end = mid-1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return potentialAns;
+    }
+}
+```
+
+- [Leetcode 1283. Find the Smallest Divisor Given a Threshold](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/) // same as the earlier one do use your brain
+
+- [LeetCode 1011. Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
+
+```java
+// Intuition : we will apply binarySearch on the capacity(mid Value) , for every mid value we will check is it possible to ship all the packages in that time(if the capacity is that then what are the no of days required to ship it)(mid value) or not , if it is possible then we will reduce the search space to left side(and store the potential answer)(reduce the end) otherwise to the right side(increase the start).
+
+// my personal favourite question from whole of binarySearch.
+
+class Solution {
+    public int daysRequired(int[] weights,int mid){
+        int days = 1;
+        int load = 0;
+        for(int wt : weights){
+            if(load+wt>mid){
+                days++;
+                load = wt;
+            }else{
+                load+=wt;
+            }
+        }
+
+        return days;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        int start = Arrays.stream(weights).max().getAsInt(); // The minimum capacity to required to ship at least one package.
+        int end = Arrays.stream(weights).sum(); // the max capacity which is required to ship all the packages in one day.
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(daysRequired(weights,mid)<=days){
+                end  = mid - 1;
+            }else{
+                start = mid +1;
+            }
+        }
+        return start;
+    }
+}
+```
+
+- [Leetcode 1539. Kth Missing Positive Number](https://leetcode.com/problems/kth-missing-positive-number/)
+  - the question which is tagged as easy but not so easy even its brute force solution is not so easy to think of and it is an interesting brute force solution.
+**Brute Force Solution:-**
+  ```java
+  class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int n = arr.length;
+        for(int i = 0;i<n;i++){
+            if(arr[i]<=k){
+                k++; // if the element is missing then we will increase the k value.
+            }else{
+                break; // if the element is not missing or it reaches the threshold where their is possibility that element has been found earlier then we will break the loop.
+            }
+        }
+
+        return k;
+    }
+}
+```
+
+**Binary Search Solution:-**
+```java
+// Intuition :: For every idx we will check how many elements are missing(it is easy to do so by missing = arr[idx]-(idx+1)) till that idx , if the missing elements are less than k then we will reduce the search space to right side(since it is not possible to exist in left side) otherwise to the left side.
+
+// Here we are not exactly finding the answer but we are finding the shorter search space in which element can exist.For every idx we will check how many elements are missing , then accordingly we will reduce our search space.
+
+//When binary search gets end , the answer is arr[high] +( more which can be added to get to the kth missing element.)
+
+// we need to find that more its comes out to be k - missing.
+// and missing here is arr[high] - (high+1) , so the answer is arr[high] + (k - (arr[high]-(high+1)).
+// which results in arr[high] + k - arr[high] + high + 1 = k + high + 1.
+// high+1 can be also written as low = high+1,
+// so the answer is k + low or high + k + 1.(it is the essence of this question)
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int n = arr.length;
+        int start = 0;
+        int end = n-1;
+
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            int missing = arr[mid] - (mid+1);
+            if(missing<k) start = mid + 1;
+            else end = mid - 1;
+        }
+        return start+k;
+    }
+}
+```
+## Binary Search on Answers - Min Max or Max Min Type Problems
+
+- [Aggressive Cows](https://www.geeksforgeeks.org/problems/aggressive-cows/0)
+```java
+// It is also same as all other predicate type questions , here for every possible distance(1,max-min) between cows , we will find out that it is possible to place that many cows(k) , if it is then we will increas our start = mid + 1(since we need largets minimum distance) , if its not we will reduce our end = mid - 1.
+
+class Solution {
+    public static boolean isPossible(int mid,int[] stalls , int k){
+        int cowsCount = 1;
+        int last = stalls[0];
+        int n = stalls.length;
+        for(int i = 1;i<n;i++){
+            if(stalls[i]-last>=mid){
+                cowsCount++;
+                last = stalls[i];
+                if(cowsCount>=k) return true;
+            }else{
+                continue;
+            }
+        }
+        
+        return cowsCount>=k;
+    }
+    public static int solve(int n, int k, int[] stalls) {
+        Arrays.sort(stalls);
+        int maxi = Arrays.stream(stalls).max().getAsInt();
+        int mini = Arrays.stream(stalls).min().getAsInt();
+        int start = 1;
+        int end = maxi - mini;
+        
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(isPossible(mid,stalls,k)){
+                start = mid+1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        
+        return end;
+    }
+}
+```
+
+
+
+
+
+
+
 
 
 
