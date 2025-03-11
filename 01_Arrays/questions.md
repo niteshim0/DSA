@@ -6,3 +6,4 @@
 - 4. [Move Zeroes to End of Array](https://leetcode.com/problems/move-zeroes/description/)
 - 5. [Union of Two Sorted Arrays](https://www.naukri.com/code360/problems/sorted-array_6613259?leftPanelTabValue=SUBMISSION)
 - 6. [Intersection of Two Sorted Arrays](https://leetcode.com/problems/intersection-of-two-arrays/description/)
+- 7. [Find Missing Number in Array](https://leetcode.com/problems/missing-number/description/)
