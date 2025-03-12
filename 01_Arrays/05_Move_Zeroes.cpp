@@ -27,6 +27,7 @@ void moveZeroes(vector<int>& nums) {
 /*Optimal Approach : - Use the two pointer concept.
                      - Iterate the array if non-zero element found.
                      - Swap with first pointer.
+                     - In the process all non-zero element comes in starting and all the zeroes get right behind all the non-zero elements.
                      */
 class Solution {
 public:

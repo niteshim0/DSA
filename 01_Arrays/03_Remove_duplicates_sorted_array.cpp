@@ -13,7 +13,7 @@ int removeDuplicates(vector<int>& nums) {
         return index;
 }
 
-/*Optimal Approach : - Use two points one at first , one at immediate next.
+/*Optimal Approach : - Use two pointerss one starts at first index , one at immediate next.
                      - Check for duplicacy if duplicate move the j pointer.
                      - If not duplicate move the i pointer and update it with unique element.*/
                      

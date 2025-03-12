@@ -32,7 +32,7 @@ int getSecondLargest(vector<int> &arr) {
             }
         }
         int secondLargest = INT_MIN;
-        bool didWeFind = false; //to handle the duplicate cases
+        bool didWeFind = false; //to handle the all duplicate elements in an array cases
         for(int i = 0;i<n;i++){
             if(arr[i]!=largest && arr[i]>secondLargest){
                 secondLargest = arr[i];
@@ -44,7 +44,7 @@ int getSecondLargest(vector<int> &arr) {
 
 /*Optimal Approach : - Iterate the array 
                      - If there is need to update largest then that largest becomes secondLargest.
-                     - If there is an element such that arr[i]<largest and arr[i]>secondLargest,update it.*/
+                     - If there is an element such that arr[i]<largest and arr[i]>secondLargest,update secondLargest = arr[i].*/
 
 int getSecondLargest(vector<int> &arr) {
         int n = arr.size();

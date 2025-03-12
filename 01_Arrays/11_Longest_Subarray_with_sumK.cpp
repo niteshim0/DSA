@@ -22,7 +22,7 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 /*2.Better Approach : Using the concept of x-k + k = x .
                       Using the hashmap.
                       It is optimal if array contains positive , negative and zeroes.*/
-                    #include<bits/stdc++.h>
+                    
 int longestSubarrayWithSumK(vector<int> arr, long long k) {
     // Write your code here
      unordered_map<long long,int> mp;

@@ -1,3 +1,7 @@
+// This is the only straightForward approach.
+// if non-zero increase the count.
+// if zero found break the streak by updating cnt = 0;
+// Also observe and update the maxi.
 class Solution {
   public:
       int findMaxConsecutiveOnes(vector<int>& nums) {

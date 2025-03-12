@@ -9,3 +9,6 @@
 - 7. [Find Missing Number in Array](https://leetcode.com/problems/missing-number/description/)
 - 8. [Single Number](https://leetcode.com/problems/single-number/description/)
 - 9. [Find the longest subarray with sum K](https://www.naukri.com/code360/problems/longest-subarray-with-sum-k_6682399?leftPanelTabValue=PROBLEM)
+- 10. [Two Sum Problem](https://leetcode.com/problems/two-sum/description/)
+- 11. [Sort an Array of 0s, 1s and 2s](https://leetcode.com/problems/sort-colors/description/)
+- 12. [Majority Element](https://leetcode.com/problems/majority-element/description/)
