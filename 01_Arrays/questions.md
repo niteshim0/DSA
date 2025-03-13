@@ -12,3 +12,6 @@
 - 10. [Two Sum Problem](https://leetcode.com/problems/two-sum/description/)
 - 11. [Sort an Array of 0s, 1s and 2s](https://leetcode.com/problems/sort-colors/description/)
 - 12. [Majority Element](https://leetcode.com/problems/majority-element/description/)
+- 13. [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
+- 14. [Rearrange Array Elements by Sign](https://www.geeksforgeeks.org/rearrange-array-alternating-positive-negative-items-o1-extra-space/)
+- 15. [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
