@@ -18,7 +18,7 @@ int lower_bound(vector<int>& arr,int target){
 // auto lower = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
 
 
-/*Upper Bound : Smallest index such that arr[ind]>=target*/
+/*Upper Bound : Smallest index such that arr[ind]>target*/
 int upper_bound(vector<int>& arr,int target){
   int n = arr.size();
   int  ans = n;
@@ -38,7 +38,7 @@ int upper_bound(vector<int>& arr,int target){
 
 //auto upper = upper_bound(nums.begin(), nums.end(), target) - nums.begin();
 
-/*Floor : Largest element in the array<=target*/
+/*Floor : Largest element(X) in the array such that X <=target*/
 int findFloor(vector<int>& arr, int x) {
   int n = arr.size();
   int start = 0;
@@ -56,7 +56,7 @@ int findFloor(vector<int>& arr, int x) {
   return ans;
   
 }
-/*Ceil  : Smallest element in the array>=target*/
+/*Ceil  : Smallest element(X) in the array such that X >=target*/
 int findCeil(vector<int>& arr, int x) {
   int n = arr.size();
   int start = 0;
