@@ -11,6 +11,11 @@ class Solution {
           while(start<=end){
               int mid = start + (end-start)/2;
               if(nums[mid] == target) return mid;
+              if((nums[start] == nums[mid]) && (nums[mid] == nums[end])){
+                start++;
+                end--;
+                continue;
+              }
               if(nums[start]<=nums[mid]){//left part sorted
                   if(nums[start]<=target && target<=nums[mid]){
                       end = mid-1;
