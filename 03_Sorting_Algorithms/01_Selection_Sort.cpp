@@ -1,4 +1,5 @@
 // Selection Sort Ascending Order Version
+// select the mini and put it in correct position
 void selectionSort(vector<int> &arr) {
   int n = arr.size();
   for(int i = 0;i<n-1;i++){
@@ -20,3 +21,19 @@ void selectionSort(vector<int> &arr) {
 // It is not stable algorithm (it changes the relative order of elements)
 // It is inplace Algorithm
 // Selection Sort is best used for small datasets, educational purposes, or when memory usage needs to be minimal.
+
+// Selection Sort(Descending Order Version)
+void selectionSort(vector<int> &arr) {
+  int n = arr.size();
+  for(int i = 0;i<n-1;i++){
+      int maxi = i;
+      for(int j = i;j<n;j++){
+          if(arr[maxi]<arr[j]){
+              maxi = j;
+          }
+      }
+      int temp = arr[i];
+      arr[i] = arr[maxi];
+      arr[maxi] = temp;
+ }
+}
