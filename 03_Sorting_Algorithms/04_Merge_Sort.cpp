@@ -1,3 +1,4 @@
+// Divide the array into 2 parts and merge the sorted parts and make it reflect on original array
 class Solution {
   public:
     void merge(vector<int>& arr,int start,int mid,int end){
