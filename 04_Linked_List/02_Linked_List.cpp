@@ -28,6 +28,14 @@ void LLTraversal(Node* head){
     temp = temp->next;
   }
 }
+bool searchKey(Node* head, int key) {
+  Node* temp = head;
+  while(temp!=NULL){
+      if(temp->data == key) return true;
+      temp = temp->next;
+  }
+  return false;
+}
 int main(){
   vector<int> arr = {12,5,6,7,8};
   Node* LL = convertArr2LL(arr);
