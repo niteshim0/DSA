@@ -101,6 +101,120 @@ int main() {
 }
 ```
 
+### Stack Implementation using Linked List
+
+```c++
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data; // Data of the node
+    Node* next; // Pointer to the next node
+
+    Node(int val){
+        this->data = val; // Initialize data
+        this->next = nullptr; // Initialize next to nullptr
+    }
+};
 
 
+class Stack {
+private:
+    Node* top; // Pointer to the top node
+  
+public:
+    Stack() {
+        top = nullptr; // Initialize top to nullptr (stack is empty)
+    }
+
+    // Push an element onto the stack
+    void push(int x) {
+        Node* newNode = new Node(x); // Create a new node
+        newNode->next = top; // Link new node to the previous top
+        top = newNode; // Update top to the new node
+    }
+
+    // Pop an element from the stack
+    int pop() {
+        if (top == nullptr) {
+            cout << "Stack Underflow" << endl;
+            return -1; // Return -1 if stack is empty
+        }
+        Node* temp = top; // Store the top node
+        int poppedValue = top->data; // Get the data of the top node
+        top = top->next; // Update top to the next node
+        delete temp; // Delete the old top node
+        return poppedValue; // Return the popped value
+    }
+
+    // Peek at the top element of the stack
+    int peek() {
+        if (top == nullptr) {
+            cout << "Stack is empty" << endl;
+            return -1; // Return -1 if stack is empty
+        }
+        return top->data; // Return the data of the top node
+    }
+
+    // Check if the stack is empty
+    bool isEmpty() {
+        return (top == nullptr); // Return true if top is nullptr
+    }
+
+    // Get the size of the stack
+    int size() {
+        int count = 0; // Initialize count to 0
+        Node* current = top; // Start from the top node
+        while (current != nullptr) { // Traverse the stack
+            count++; // Increment count for each node
+            current = current->next; // Move to the next node
+        }
+        return count; // Return the size of the stack
+    }
+};
+
+int main() {
+    Stack s; // Create a stack object
+
+    s.push(10); // Push 10 onto the stack
+    s.push(20); // Push 20 onto the stack
+    s.push(30); // Push 30 onto the stack
+
+    cout << "Top element is: " << s.peek() << endl; // Peek at the top element
+
+    cout << "Stack size is: " << s.size() << endl; // Get the size of the stack
+
+    cout << "Popped element is: " << s.pop() << endl; // Pop an element from the stack
+
+    cout << "Stack size after pop is: " << s.size() << endl; // Get the size of the stack after pop
+
+    return 0;
+}
+```
+### Stack Implementation using STL (C++ Standard Template Library)
+
+```c++
+#include <iostream>
+#include <stack> // Include the stack header
+using namespace std;
+
+int main() {
+    stack<int> s; // Create a stack of integers
+
+    s.push(10); // Push 10 onto the stack
+    s.push(20); // Push 20 onto the stack
+    s.push(30); // Push 30 onto the stack
+
+    cout << "Top element is: " << s.top() << endl; // Peek at the top element
+
+    cout << "Stack size is: " << s.size() << endl; // Get the size of the stack
+
+    cout << "Popped element is: " << s.top() << endl; // Peek at the top element before popping
+    s.pop(); // Pop an element from the stack
+
+    cout << "Stack size after pop is: " << s.size() << endl; // Get the size of the stack after pop
+
+    return 0;
+}
+```
 
