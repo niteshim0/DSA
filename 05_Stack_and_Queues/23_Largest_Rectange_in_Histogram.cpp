@@ -32,11 +32,11 @@ class Solution {
       }
       int largestRectangleArea(vector<int>& heights) {
           vector<int> pse = prevSmallerElement(heights);
-          vector<int> nge = nextSmallerElement(heights);
+          vector<int> nse = nextSmallerElement(heights);
           int n  = heights.size();
           int maxi = 0;
           for(int i = 0;i<n;i++){
-              int width = nge[i] - pse[i] - 1;
+              int width = nse[i] - pse[i] - 1;
               int area  = width*heights[i];
               maxi = max(maxi,area);
           }
