@@ -76,3 +76,30 @@ class Solution {
     };
     // Time Complexity : O(N+N)
     // Space Complexity : O(N)
+
+    // Improved version of previous code
+
+    class Solution {
+        public:
+            int largestRectangleArea(vector<int>& heights) {
+                stack<int> st;
+                int max_area = 0;
+                const int n = heights.size();
+                
+                for (int i = 0; i <= n; i++) {
+                    // Process all bars that are higher than current (or end)
+                    while (!st.empty() && (i == n || heights[st.top()] > heights[i])) {
+                        int height = heights[st.top()];
+                        st.pop();
+                        // Left boundary is previous in stack or -1 if empty
+                        int width = st.empty() ? i : (i - st.top() - 1);
+                        max_area = max(max_area, height * width);
+                    }
+                    if (i < n) {
+                        st.push(i);
+                    }
+                }
+                
+                return max_area;
+            }
+        };
