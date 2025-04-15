@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
   public:
     int celebrity(vector<vector<int> >& mat) {
         int n = mat.size();
