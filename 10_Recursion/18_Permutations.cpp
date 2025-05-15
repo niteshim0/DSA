@@ -38,8 +38,8 @@ public:
     }
     void generatePermute(int idx,vector<int>&nums,vector<vector<int>>& ans){
         if(idx == nums.size()){
-            vector<int> ds = nums;
-            ans.push_back(ds);
+            ans.push_back(nums);
+            return;
         }
         for(int i = idx;i<nums.size();i++){
             swap(nums,i,idx);
