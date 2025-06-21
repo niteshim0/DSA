@@ -13,7 +13,7 @@ public:
     }
 };
 // Time Complexity : O(2^(m*n))
-// Space Complexity : O(m-1 + n-1)
+// Space Complexity : O(m+n-1)
 
 // 2. Memoization Solution
 

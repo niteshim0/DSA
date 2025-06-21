@@ -18,7 +18,7 @@ public:
     }
 };
 // Time Complexity : O(2^(M*N))
-// Space Complexity : O(M-1 + N-1) // recursion stack space
+// Space Complexity : O(M+N-1) // recursion stack space
 
 
 // 2. Memoization Solution
@@ -42,7 +42,7 @@ public:
     }
 };
 // Time Complexity : O(M*N)
-// Space Complexity : O(M*N) +O(M-1 + N-1);
+// Space Complexity : O(M*N) +O(M+N-1);
 
 // 3. Tabulation Solution
 class Solution {
