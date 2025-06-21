@@ -10,3 +10,7 @@
 - 8. [Unique Paths II](https://leetcode.com/problems/unique-paths-
 ii/description/)
 - 9. [Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/description/)
+- 10. [Triangle](https://leetcode.com/problems/triangle/description/)
+- 11. [Minimum Falling Path Sum](https://leetcode.com/problems/minimum-falling-path-sum/description/)
+- 12. [Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/)
+- 13. [Cherry Pickup II](https://leetcode.com/problems/cherry-pickup-ii/description/)
