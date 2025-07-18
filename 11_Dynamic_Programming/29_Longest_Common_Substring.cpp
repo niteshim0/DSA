@@ -16,7 +16,7 @@ class Solution {
                     dp[idx1][idx2] = 1 + dp[idx1-1][idx2-1];
                     ans = max(ans,dp[idx1][idx2]);
                 }else{
-                    dp[idx1][idx2] = 0;
+                    dp[idx1][idx2] = 0; // if not continuous characters get intitilized to zero.
                 }
             }
         }
