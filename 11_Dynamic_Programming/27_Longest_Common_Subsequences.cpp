@@ -47,7 +47,9 @@ class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
         int n1 = text1.size() , n2 = text2.size();
-        vector<vector<int>> dp(n1+1,vector<int>(n2+1,-1));
+        vector<vector<int>> dp(n1+1,vector<int>(n2+1,0));
+
+        // these base case declaration becomes redundant as they get intialized when we had declared dp array
         for(int idx1 = 0;idx1<=n1;idx1++){
             dp[idx1][0] = 0;
         }
