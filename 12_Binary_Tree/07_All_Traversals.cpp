@@ -24,7 +24,8 @@ public:
                 postOrder.push_back(node->val);
             }
         }
-        return preOrder;
+        vector<vector<int>> ans = {preOrder,inOrder,postOrder};
+        return ans;
     }
 };
 // Time Complexity : O(3*N)
