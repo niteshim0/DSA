@@ -49,7 +49,7 @@ public:
         vector<int> postOrder;
         if(root == NULL) return postOrder;
         TreeNode* node = root;
-        stack<TreeNode*> st1,st2;
+        stack<TreeNode*> st1;
         st1.push(root);
         while(!st1.empty()){
             node = st1.top();st1.pop();
