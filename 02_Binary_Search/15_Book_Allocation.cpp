@@ -1,33 +1,44 @@
-bool isPossible(vector<int>& arr,int mid,int k){
-  int stud = 1;
-  int pages = 0;
-  for(int &page : arr){
-      if(page>mid) return false;
-      if(pages+page>mid){
-          stud++;
-          pages = page;
-          if(stud>k) return false;
-      }else{
-          pages+=page;
-      }
-  }
-  return true;
-}
-int findPages(vector<int> &arr, int k) {
-  // code here
-  int ans = -1;
-  int start = *max_element(arr.begin(),arr.end());
-  int n = arr.size();
-  if(k>n) return -1;
-  int end = accumulate(arr.begin(),arr.end(),0);
-  while(start<=end){
-      int mid = start + (end-start)/2;
-      if(isPossible(arr,mid,k)){
-          ans = mid;
-          end = mid-1;
-      }else{
-          start = mid+1;
-      }
-  }
-  return ans;
-}
+class Solution {
+public:
+    bool canDistribute(const vector<int>& books, int students, int maxPages) {
+        int requiredStudents = 1;
+        int currentPages = 0;
+
+        for (int pages : books) {
+            if (currentPages + pages > maxPages) {
+                requiredStudents++;
+                currentPages = pages;
+                if (requiredStudents > students) return false;
+            } else {
+                currentPages += pages;
+            }
+        }
+        return true;
+    }
+
+    int findPages(vector<int>& books, int students) {
+        int n = books.size();
+        if (n < students) return -1;
+
+        int start = 0, end = 0;
+        for (int pages : books) {
+            start = max(start, pages);  
+            end += pages;           
+        }
+
+        int answer = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (canDistribute(books, students, mid)) {
+                answer = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return answer;
+    }
+};
+// Time Complexity : O(Nlog(Sum of Pages))
+// Space Complexity : O(1)
