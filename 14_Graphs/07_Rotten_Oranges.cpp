@@ -1,3 +1,4 @@
+// extra visted array is not needed as once the orange gets rotten , we are not visiting it anymore according to the question condition.
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {

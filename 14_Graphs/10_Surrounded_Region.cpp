@@ -1,4 +1,6 @@
 // BFS Approach
+// if O is somehow attached to the boundary then , it will never be surrounded,
+// this is the logic used here
 class Solution {
 public:
     void solve(vector<vector<char>>& board) {
