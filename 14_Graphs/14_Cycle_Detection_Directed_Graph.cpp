@@ -47,6 +47,7 @@ class Solution {
 // Space: O(V) for vis, pathVis, and recursion stack.
 
 // BFS Approach or Topological Sorting(Kahn's Algo)
+// if there is cycle one can't get any Topological Order
 
 class Solution {
   public:
