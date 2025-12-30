@@ -17,7 +17,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
   }
   ListNode* temp = sumList;
   ListNode* newHead = temp->next;
-  return newHead;;
+  return newHead;
 }
 
 // Time Complexity : O(N)
