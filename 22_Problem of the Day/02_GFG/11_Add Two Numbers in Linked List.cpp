@@ -79,7 +79,7 @@ class Solution {
         if (!s1.empty()) { sum += s1.top(); s1.pop(); }
         if (!s2.empty()) { sum += s2.top(); s2.pop(); }
 
-        Node* node = new Node(sum % 10);
+        Node* node = new Node(sum % 10); // processing data in reverse order
         node->next = head;
         head = node;
 
