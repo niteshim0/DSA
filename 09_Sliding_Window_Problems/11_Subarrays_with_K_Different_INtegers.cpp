@@ -1,31 +1,31 @@
 class Solution {
 public:
-    long long subarrAtMostKDistinct(vector<int> &nums,int k){
-        int n = nums.size();
-        map<int,int> mp;
-        int i = 0;
-        int j = 0;
-        int cnt = 0;
-        int res = 0;
+    int subarraysWithAtMostKDistinct(vector<int>& nums,int k){
+        int n = nums.size() , res = 0;
+        int i = 0,j = 0;
+        unordered_map<int,int> mp;
+        int cntDistinct = 0;
+
         while(j<n){
-           mp[nums[j]]++;
-           if(mp[nums[j]]==1) cnt++;
-           if(cnt>k){
-               while(cnt>k){
-                   mp[nums[i]]--;
-                   if(mp[nums[i]]==0){
-                       cnt--;
-                   }
-                   i++;
-               }
-           }
-           res+=(j-i+1);
-           j++;
+            mp[nums[j]]++;
+            if(mp[nums[j]] == 1) cntDistinct++;
+
+            while(cntDistinct>k){
+                mp[nums[i]]--;
+                if(mp[nums[i]] == 0) {
+                    mp.erase(nums[i]);
+                    cntDistinct--;
+                }
+                i++;
+            }
+            res+=(j-i+1);
+            j++;
         }
+
         return res;
     }
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-        return subarrAtMostKDistinct(nums,k)-subarrAtMostKDistinct(nums,k-1);
+        return subarraysWithAtMostKDistinct(nums,k) - subarraysWithAtMostKDistinct(nums,k-1);
     }
 };
 // Time Complexity : O(N)
