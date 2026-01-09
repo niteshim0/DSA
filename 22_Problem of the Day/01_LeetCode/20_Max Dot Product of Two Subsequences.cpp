@@ -1,5 +1,7 @@
 // LC 1458. Max Dot Product of Two Subsequences
+// https://leetcode.com/problems/max-dot-product-of-two-subsequences/?envType=daily-question&envId=2026-01-08
 
+// Concept :: DP on Subsequences
 
 // Approach I : Memoization(Top Down Approach)
 
