@@ -38,7 +38,7 @@ public:
 };
 
 // Time Complexity : O(N*M)
-// Space Complexity : O(N)
+// Space Complexity : O(1)
 
 
 
@@ -77,6 +77,7 @@ public:
 
             if (j < m) break; // s1 reaches its ends ,
             //but still there is no any sign of s2
+            // no point in searching anymore
             
             int end = i;
             j = m - 1;
