@@ -1,6 +1,6 @@
 // LC 2975. Maximum Square Area By Removing Fences From a Field
 // https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/description/
-
+// Approach :: Greedy + Geometry + Sometimes Brute Force is Optimal Solution
 
 class Solution {
 public:
