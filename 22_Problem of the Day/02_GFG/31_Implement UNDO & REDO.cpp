@@ -1,6 +1,7 @@
 // Implement UNDO & REDO
 // https://www.geeksforgeeks.org/problems/implement-undo-redo/1
-
+// Concept :: Stack 
+// Approach :: Maintain two stacks such that they tracks undo and redo part and for string , maintain a text string.
 class Solution {
   private:
     string text = "";
