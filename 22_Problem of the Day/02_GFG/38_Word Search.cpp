@@ -1,3 +1,9 @@
+// Word Search
+// https://www.geeksforgeeks.org/problems/word-search/1
+// Concept :: DFS + Backtracking + Recursion
+// Approach :: We will traverse the whole matrix , if the first char of searching str found , we will start searching , in all four directions , if we found the next char we keep moving in this way until we reach the last one.
+// if we can't reach the last one , we will turn it off its visited.
+// and repeat the same process , if somewhere first character is found.
 class Solution {
   public:
     bool dfs(int row,int col,vector<vector<char>> &mat, string &word,int idx,vector<vector<int>>& vis){
