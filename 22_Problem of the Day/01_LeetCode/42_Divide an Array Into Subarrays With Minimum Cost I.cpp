@@ -1,5 +1,11 @@
 // LC 3010. Divide an Array Into Subarrays With Minimum Cost I
 // https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/description
+// Concept :: How to find the first and second extremes(min,max) in a single loop
+
+// Approach ::
+// i) Since we need to have array contiguous , we always need to take the first element , now the question remains , where we part two lines.
+// ii) Most viable one be , right before the most minimal one.
+// iii) in b/w these two , find the second minimal element , it will make always the right choice.
 
 class Solution {
 public:
