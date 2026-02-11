@@ -1,6 +1,6 @@
 class Solution {
   public:
-    // Function to return list containing elements of right view of binary tree.
+    // Function to return list containing elements of left view of binary tree.
     void leftViewSolver(Node* node,int level,vector<int>& ans){
         if(node == NULL) return;
         if(level == ans.size()){
