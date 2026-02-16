@@ -8,8 +8,9 @@
 class Solution {
   public:
     static bool cmp(vector<int>& first,vector<int>& second){
-        if(first[1] == second[1]) return first[0]<=second[0];
+        if(first[1] == second[1]) return first[0]<second[0];
         return first[1]<second[1];
+        // always use strict check < not <=
     }
     bool canAttend(vector<vector<int>> &arr) {
         
@@ -32,3 +33,22 @@ class Solution {
 
 // Time Complexity : O(NlogN)// sorting time
 // Space Complexity : O(N) // auxiliary sorting takes such space in any language
+
+// this can also be done by sorting on start time
+
+class Solution {
+public:
+
+    bool canAttend(vector<vector<int>> &arr) {
+        sort(arr.begin(), arr.end());
+
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr[i - 1][1] > arr[i][0]) 
+                return false;
+        }
+        return true;
+    }
+};
+
+// Time Complexity : O(NlogN)// sorting time
+// Space Complexity : O(N) 
