@@ -18,8 +18,7 @@ I’m using a merge-sort-based inversion count. To optimize, I pre-allocate a te
 class Solution {
 public:
     int merge(vector<int>& arr, vector<int>& temp, int left, int mid, int right) {
-      
-        int cnt = 0;
+        long long cnt = 0;
         int i = left, j = mid + 1, k = left;
 
         while (i <= mid && j <= right) {
@@ -46,7 +45,7 @@ public:
         if (left >= right) return 0;
 
         int mid = left + (right - left) / 2;
-        int cnt = 0;
+        long long cnt = 0;
 
         cnt += mergeSort(arr, temp, left, mid);
         cnt += mergeSort(arr, temp, mid + 1, right);
@@ -61,6 +60,7 @@ public:
         return mergeSort(arr, temp, 0, n - 1);
     }
 };
+
 
 // Time Complexity : O(NlogN)
 // Space Complexity : O(N)
