@@ -72,4 +72,39 @@ class Solution {
 
 // Time Complexity : O(2N + 2N + N)
 // Space Complexity : O(N + N)
+
+// Technique 2 :: One Pass Solution
+class Solution {
+public:
+    const int MOD = 1e9 + 7;
+
+    int sumSubarrayMins(vector<int>& arr) {
+        int n = arr.size();
+        int totalMinSum = 0;
+        stack<int> st;
+
+        for(int i = 0; i <= n; i++) {
+
+            while(!st.empty() && (i == n || arr[st.top()] >= arr[i])) {
+
+                int mid = st.top();
+                st.pop();
+
+                int prev = st.empty() ? -1 : st.top();
+                int next = i;
+
+                int left = mid - prev;
+                int right = next - mid;
+
+                totalMinSum = (totalMinSum + left *1LL* right % MOD * arr[mid] % MOD) % MOD;
+            }
+
+            st.push(i);
+        }
+
+        return totalMinSum;
+    }
+};
+// Time Complexity : O(N)
+// Space Complexity : O(N)
     
