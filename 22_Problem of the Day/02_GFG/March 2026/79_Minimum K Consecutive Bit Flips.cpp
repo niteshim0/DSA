@@ -1,7 +1,7 @@
 // Minimum K Consecutive Bit Flips
 // https://www.geeksforgeeks.org/problems/minimum-number-of-k-consecutive-bit-flips--171650/1
 
-// Concepts :: Greedy + Sliding Window + Simple Logic + Bit Manipulation
+// Concepts :: Greedy + Sliding Window + Simple Logic + Bit Manipulation + Binary Flipping + Deque
 
 // ------  > Key Observation < ----------------------
 /*
@@ -146,6 +146,8 @@ If we delay, that bit will never be part of another window.
 Thus greedy is forced → hence optimal.
 */
 
+// there is also one deque solution of space complexity O(K) , which i don't find interesting , i think these are good enough.
+
 // Approach 3 :: Tracking the flip window through input array
 class Solution {
 public:
@@ -160,7 +162,7 @@ public:
                 flip = !flip;
             }
 
-            if((nums[i] ^ (flip % 2)) == 0){
+            if(nums[i] == flip){
 
                 if(i + k > n) return -1;
 
