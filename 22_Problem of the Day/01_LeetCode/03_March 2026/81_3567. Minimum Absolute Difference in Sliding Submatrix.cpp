@@ -1,7 +1,7 @@
 // LC 3567. Minimum Absolute Difference in Sliding Submatrix
 // https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix/description/
 
-// Concepts :: Sorting + 2D Array Traversal + SubMatrix traversal inside it + distinct element difference
+// Concepts :: Sorting + 2D Array Traversal + SubMatrix traversal inside it + distinct element difference + Matrix
 
 // Approach :: Just do what question said, brute force your way to the ques.
 
