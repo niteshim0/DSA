@@ -43,5 +43,43 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> countBSTs(vector<int>& arr) {
+        
+        int n = arr.size();
+        
+        vector<long long> catalan(n+1, 0);
+        catalan[0] = catalan[1] = 1;
+
+        for(int i = 2; i <= n; i++){
+            for(int j = 0; j < i; j++){
+                catalan[i] += catalan[j] * catalan[i - j - 1];
+            }
+        }
+
+
+        vector<int> sorted = arr;
+        sort(sorted.begin(), sorted.end());
+
+        vector<int> ans;
+        unordered_map<int,int> rank;
+        for(int i = 0;i<n;i++){
+            rank[sorted[i]] = i;
+        }
+
+        for(int i = 0; i < n; i++){
+            
+            int left  = rank[arr[i]];
+            int right = n - left - 1;
+
+            long long ways = catalan[left] * catalan[right];
+            ans.push_back(ways);
+        }
+
+        return ans;
+    }
+};
+
 // Time Complexity : O(N*N)
 // Space Complexity : O(N)
