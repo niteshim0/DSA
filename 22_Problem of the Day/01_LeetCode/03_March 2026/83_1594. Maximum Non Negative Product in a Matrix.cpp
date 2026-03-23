@@ -1,7 +1,7 @@
 // LC 1594. Maximum Non Negative Product in a Matrix
 // https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/description/
 
-// Concepts :: Reursion + Dynamic Programming(all optimizations) + typical pick/non-pick choices + Strong syntax knowledge of programmming language(here C++)
+// Concepts :: Reursion + Dynamic Programming(all optimizations) + typical pick/non-pick choices + Strong syntax knowledge of programmming language(here C++) + Rolling Arrays (needed in space optimzation)
 
 // Key Idea:
 // Tracking both maximum and minimum products at each cell to handle negative number sign flips during path traversal.
@@ -119,3 +119,111 @@ public:
 // Technique3 :: Tabulation (Bottom Up DP) 
 // Recursion stack space can be avoided
 
+
+class Solution {
+public:
+
+    const int MOD = 1e9 + 7;
+
+    int maxProductPath(vector<vector<int>>& grid) {
+        
+        int n = grid.size() , m = grid[0].size();
+
+        vector<vector<long long>> maxDP(n,vector<long long>(m));
+
+        vector<vector<long long>> minDP(n,vector<long long>(m));
+
+        maxDP[0][0] = minDP[0][0] = grid[0][0];
+
+        for(int col = 1;col<m;col++){
+
+            maxDP[0][col] = minDP[0][col] = maxDP[0][col-1] * grid[0][col];
+
+        }
+
+        for(int row = 1;row<n;row++){
+
+            maxDP[row][0] = minDP[row][0] = maxDP[row-1][0] * grid[row][0];
+
+        }
+
+        for(int row = 1; row<n; row++){
+
+            for(int col = 1;col<m;col++){
+
+                long long a = maxDP[row-1][col] * grid[row][col];
+                long long b = minDP[row-1][col] * grid[row][col];
+                long long c = maxDP[row][col-1] * grid[row][col];
+                long long d = minDP[row][col-1] * grid[row][col];
+
+                maxDP[row][col] = max({a, b, c, d});
+                minDP[row][col] = min({a, b, c, d});
+
+            }
+        }
+
+        long long res = maxDP[n-1][m-1];
+
+        return res < 0 ? -1 : (res%MOD);
+
+
+    }
+};
+
+
+// | Complexity | Value                                 |
+// | ---------- | ------------------------------------- |
+// | Time       | **O(N*M)**|
+// | Space      | **O(N*M)**
+
+// Technique 4 :: Space Optimized
+
+class Solution {
+public:
+
+    const int MOD = 1e9 + 7;
+
+    int maxProductPath(vector<vector<int>>& grid) {
+
+        int n = grid.size(), m = grid[0].size();
+
+        vector<long long> maxDp(m), minDp(m);
+
+        maxDp[0] = minDp[0] = grid[0][0];
+
+        for(int j = 1; j < m; j++) {
+            maxDp[j] = minDp[j] = maxDp[j-1] * grid[0][j];
+        }
+
+        for(int i = 1; i < n; i++) {
+
+            // update first column
+            maxDp[0] = maxDp[0] * grid[i][0];
+            minDp[0] = minDp[0] * grid[i][0];
+
+            for(int j = 1; j < m; j++) {
+
+                long long a = maxDp[j] * grid[i][j];     // from top
+                long long b = minDp[j] * grid[i][j];     // from top
+                long long c = maxDp[j-1] * grid[i][j];   // from left
+                long long d = minDp[j-1] * grid[i][j];   // from left
+
+                long long newMax = max({a, b, c, d});
+                long long newMin = min({a, b, c, d});
+
+                maxDp[j] = newMax;
+                minDp[j] = newMin;
+            }
+        }
+
+        long long res = maxDp[m-1];
+        
+        return res < 0 ? -1 : (res%MOD);
+
+    }
+};
+
+// | Complexity | Value                                 |
+// | ---------- | ------------------------------------- |
+// | Time       | **O(N*M)**|
+// | Space      | **O(M)**
