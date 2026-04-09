@@ -206,3 +206,9 @@ public:
         return modExp(x, MOD - 2);
     }
 };
+
+// Traditional trees (Segment Tree/Fenwick Tree) yahan fail ho jate hain kyunki indices continuous nahi hain.
+// They work on continuous indices.
+// Normal range update problems mein humein [l, r] (continuous) range di jati hai. Par yahan query hai: Update indices l, l+k, l+2k, ..... up to r. (Arithmetic Progression Updates)
+// if k small -> normal update
+// if k large -> jumpy update
