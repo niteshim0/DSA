@@ -31,7 +31,7 @@ public:
     }
 };
 
-// Time Complexity : O(N)
+// Time Complexity : O(N * L) where L is the length of the target string
 // Space Complexity : O(1)
 
 
@@ -55,5 +55,5 @@ public:
     }
 };
 
-// Time Complexity : O(N)
+// Time Complexity : O(N * L) where L is the lenght of the target string.
 // Space Complexity : O(1)
