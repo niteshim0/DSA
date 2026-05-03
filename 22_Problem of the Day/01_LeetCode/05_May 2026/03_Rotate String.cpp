@@ -125,3 +125,67 @@ public:
 };
 // Time Complexity : O(N)
 // Space Complexity : O(1)
+
+
+// Double Hashing (Almost negligible chance of collision)
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        if (s.size() != goal.size()) return false;
+
+        int n = s.size();
+        string text = s + s;
+
+        // two bases and mods
+        long long p1 = 31, mod1 = 1e9 + 7;
+        long long p2 = 37, mod2 = 1e9 + 9;
+
+        // power for removing left char
+        long long power1 = 1, power2 = 1;
+        for (int i = 0; i < n - 1; i++) {
+            power1 = (power1 * p1) % mod1;
+            power2 = (power2 * p2) % mod2;
+        }
+
+        // goal hash
+        long long goalHash1 = 0, goalHash2 = 0;
+        for (char c : goal) {
+            int val = c - 'a' + 1;
+            goalHash1 = (goalHash1 * p1 + val) % mod1;
+            goalHash2 = (goalHash2 * p2 + val) % mod2;
+        }
+
+        // first window hash
+        long long winHash1 = 0, winHash2 = 0;
+        for (int i = 0; i < n; i++) {
+            int val = text[i] - 'a' + 1;
+            winHash1 = (winHash1 * p1 + val) % mod1;
+            winHash2 = (winHash2 * p2 + val) % mod2;
+        }
+
+        // sliding window
+        for (int i = 0; i <= text.size() - n; i++) {
+
+            if (winHash1 == goalHash1 && winHash2 == goalHash2) {
+                // optional verify (ultra safe)
+                if (text.substr(i, n) == goal) return true;
+            }
+
+            if (i + n < text.size()) {
+                int leftVal = text[i] - 'a' + 1;
+                int rightVal = text[i + n] - 'a' + 1;
+
+                // remove left
+                winHash1 = (winHash1 - leftVal * power1 % mod1 + mod1) % mod1;
+                winHash2 = (winHash2 - leftVal * power2 % mod2 + mod2) % mod2;
+
+                // add right
+                winHash1 = (winHash1 * p1 + rightVal) % mod1;
+                winHash2 = (winHash2 * p2 + rightVal) % mod2;
+            }
+        }
+
+        return false;
+    }
+};
