@@ -155,6 +155,325 @@ class Solution {
     }
 };
 
+/*
+Dry Run ::
+
+Goal
+
+We want:
+
+arr[i] + arr[j]
+
+to become palindrome.
+
+Core Trick
+
+For every word:
+
+LEFT | RIGHT
+
+we try every partition.
+
+Then:
+
+Case 1
+
+If:
+
+LEFT is palindrome
+
+then search:
+
+reverse(RIGHT)
+
+because:
+
+reverse(RIGHT) + LEFT + RIGHT
+
+can become palindrome.
+
+Case 2
+
+If:
+
+RIGHT is palindrome
+
+then search:
+
+reverse(LEFT)
+
+because:
+
+LEFT + RIGHT + reverse(LEFT)
+
+can become palindrome.
+
+Test Case 1
+["bat","tab"]
+
+HashMap:
+
+{
+ "bat" : 0,
+ "tab" : 1
+}
+
+Take:
+
+word = "bat"
+
+Partitions:
+
+cut = 0
+"" | "bat"
+
+LEFT = ""
+
+Palindrome? YES.
+
+Need:
+
+reverse("bat")
+= "tab"
+
+Exists in map.
+
+So:
+
+"tab" + "bat"
+= "tabbat"
+
+Palindrome.
+
+Answer = true.
+
+WHY THIS WORKS
+
+We got:
+
+reverse(RIGHT) + LEFT + RIGHT
+
+which became:
+
+"tab" + "" + "bat"
+
+Outer parts mirror each other.
+
+Test Case 2
+["abcd","dcba"]
+
+Take:
+
+word = "abcd"
+cut = 0
+"" | "abcd"
+
+LEFT palindrome? YES.
+
+Need:
+
+reverse("abcd")
+= "dcba"
+
+Exists.
+
+So:
+
+"dcba" + "abcd"
+
+Palindrome.
+
+Test Case 3
+["lls","s"]
+
+This is the important one.
+
+Take:
+
+word = "lls"
+
+Partitions:
+
+cut = 0
+"" | "lls"
+
+Need reverse("lls"):
+
+"sll"
+
+Not found.
+
+cut = 1
+"l" | "ls"
+
+LEFT palindrome? YES.
+
+Need:
+
+reverse("ls")
+= "sl"
+
+Not found.
+
+cut = 2
+"ll" | "s"
+
+LEFT palindrome? YES.
+
+Need:
+
+reverse("s")
+= "s"
+
+FOUND.
+
+So:
+
+"s" + "lls"
+= "slls"
+
+Palindrome.
+
+Visual Understanding
+s + ll + s
+
+Perfect mirror.
+
+Test Case 4
+["abcd","cba"]
+
+Take:
+
+word = "abcd"
+
+Partitions:
+
+cut = 3
+"abc" | "d"
+
+RIGHT palindrome? YES ("d")
+
+Need:
+
+reverse("abc")
+= "cba"
+
+Exists.
+
+So:
+
+"abcd" + "cba"
+= "abcdcba"
+
+Palindrome.
+
+Why RIGHT Palindrome Case Works
+
+We got:
+
+LEFT + RIGHT + reverse(LEFT)
+
+which became:
+
+abc + d + cba
+
+Mirror formed.
+
+Important Insight
+
+The palindrome part becomes the center.
+
+The reversed missing part becomes the mirror.
+
+Empty String Case
+["", "aba"]
+
+Take:
+
+word = "aba"
+
+Partition:
+
+"aba" | ""
+
+RIGHT palindrome? YES ("")
+
+Need:
+
+reverse("aba")
+= "aba"
+
+Actually handled naturally.
+
+Also:
+
+"" + "aba"
+
+and
+
+"aba" + ""
+
+both palindrome.
+
+Why We Try ALL Cuts
+
+Because palindrome boundary can occur anywhere.
+
+Example:
+
+abcd | cba
+
+match happens at cut = 3.
+
+Example:
+
+ll | s
+
+match happens at cut = 2.
+
+We don't know beforehand.
+
+Final Mental Model
+
+At every cut:
+
+LEFT | RIGHT
+
+Ask:
+
+Can LEFT become center?
+
+If yes:
+
+Need reverse(RIGHT)
+
+before word.
+
+Can RIGHT become center?
+
+If yes:
+
+Need reverse(LEFT)
+
+after word.
+
+Why Complexity is O(n * k²)
+
+For every word:
+
+k cuts
+palindrome check = O(k)
+reverse = O(k)
+
+Total:
+
+O(k²)
+
+For n words:
+
+O(n * k²)
+*/
+
 // Time Complexity : O(N * K * K)
 // Space Complexity : O(N)
 
