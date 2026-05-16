@@ -4,6 +4,8 @@
 
 // Concepts :: Greedy + Sorting
 
+// Key Idea :: If continuity gets maintained , then one can reach [1,x-1]
+
 class Solution {
   public:
     int findSmallest(vector<int> &arr) {
