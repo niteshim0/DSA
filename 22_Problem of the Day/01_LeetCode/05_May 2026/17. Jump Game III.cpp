@@ -133,3 +133,37 @@ public:
 
 // Time Complexity : O(N)
 // Space Complexity : O(N)
+
+/*
+GRAPH ON ARRAY PATTERN
+
+1. Treat index/cell/state as node
+
+2. Generate neighbors dynamically:
+   i+arr[i]
+   i-arr[i]
+
+3. Use BFS:
+   queue + visited
+
+4. BFS:
+   - reachability
+   - shortest steps
+
+5. DFS:
+   - exploration only
+
+6. Watch cycles:
+   visited necessary
+
+Related:
+Jump Game III
+Jump Game IV
+Open Lock
+Word Ladder
+Rotting Oranges
+01 Matrix
+Bus Routes
+Minimum Jumps to Reach Home
+Shortest Path Visiting All Nodes
+*/
